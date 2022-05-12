@@ -1,11 +1,13 @@
 # Root Operation Types
 type Query {
+    # Return all people in the database
     allPeople: [Person]
-    allPeoplePaged(page: Int, size: Int): [PersonConnection]
+    # Return all people limited by page & size
+    allPeoplePaged(page: Int, size: Int): [Person]
 }
 
 # Object Types
-type Person implements Node {
+type Person {
     id: ID!
     firstName: String
     lastName: String
@@ -14,53 +16,10 @@ type Person implements Node {
     address: Address
 }
 
-type Address implements Node {
+type Address {
     id: ID!
     address: String
     city: String
     state: String
     zip: String
 }
-
-type PageInfo {
-    perPage: Int!
-    currentPage: Int!
-    totalPages: Int!
-    totalItems: Int!
-    hasPreviousPage: Boolean!
-    hasNextPage: Boolean!
-    isFirst: Boolean!
-    isLast: Boolean!
-}
-
-type PersonConnection implements NodeConnection {
-    totalCount: Int!
-    pageInfo: PageInfo!
-    edges: [PersonEdge]
-}
-
-type PersonEdge implements NodeConnectionEdge {
-    node: Person
-    next: Person
-    previous: Person
-}
-
-
-# Interfaces
-
-interface Node {
-    id: ID!
-}
-
-interface NodeConnection {
-    totalCount: Int!
-    pageInfo: PageInfo!
-    edges: [NodeConnectionEdge]
-}
-
-interface NodeConnectionEdge {
-    node: Node
-    next: Node
-    previous: Node
-}
-
