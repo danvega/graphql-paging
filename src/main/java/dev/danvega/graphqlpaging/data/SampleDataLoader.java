@@ -2,7 +2,6 @@ package dev.danvega.graphqlpaging.data;
 
 import com.github.javafaker.Faker;
 import dev.danvega.graphqlpaging.model.Address;
-import dev.danvega.graphqlpaging.model.Person;
 import dev.danvega.graphqlpaging.repository.PersonRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

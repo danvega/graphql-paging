@@ -1,6 +1,5 @@
 package dev.danvega.graphqlpaging.controller;
 
-import dev.danvega.graphqlpaging.model.Person;
 import dev.danvega.graphqlpaging.repository.PersonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
