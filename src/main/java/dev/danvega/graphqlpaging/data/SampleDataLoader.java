@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import dev.danvega.graphqlpaging.model.Address;
 import dev.danvega.graphqlpaging.model.Person;
 import dev.danvega.graphqlpaging.repository.PersonRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +18,9 @@ public class SampleDataLoader implements CommandLineRunner {
     private final PersonRepository repository;
     private final Faker faker;
 
-    public SampleDataLoader(PersonRepository repository, Faker faker) {
+    public SampleDataLoader(PersonRepository repository) {
         this.repository = repository;
-        this.faker = faker;
+        this.faker = new Faker();
     }
 
     @Override
@@ -27,16 +29,16 @@ public class SampleDataLoader implements CommandLineRunner {
         // create 100 rows of people in the database
         List<Person> people = IntStream.rangeClosed(1,100)
                 .mapToObj(i -> new Person(
-                    faker.name().firstName(),
-                    faker.name().lastName(),
-                    faker.phoneNumber().cellPhone(),
-                    faker.internet().emailAddress(),
-                    new Address(
-                            faker.address().streetAddress(),
-                            faker.address().city(),
-                            faker.address().state(),
-                            faker.address().zipCode()
-                    )
+                        faker.name().firstName(),
+                        faker.name().lastName(),
+                        faker.phoneNumber().cellPhone(),
+                        faker.internet().emailAddress(),
+                        new Address(
+                                faker.address().streetAddress(),
+                                faker.address().city(),
+                                faker.address().state(),
+                                faker.address().zipCode()
+                        )
                 )).toList();
 
         repository.saveAll(people);

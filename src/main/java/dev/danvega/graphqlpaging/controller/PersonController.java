@@ -4,7 +4,6 @@ import dev.danvega.graphqlpaging.model.Person;
 import dev.danvega.graphqlpaging.repository.PersonRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,8 +20,9 @@ public class PersonController {
     }
 
     @GetMapping
-    public Page<Person> findAll(@RequestParam int page, @RequestParam int size, @RequestParam String sort) {
-        PageRequest pr = PageRequest.of(page,size, Sort.by(sort));
+    public Page<Person> findAll(@RequestParam int page, @RequestParam int size) {
+        PageRequest pr = PageRequest.of(page,size);
         return repository.findAll(pr);
     }
+
 }
